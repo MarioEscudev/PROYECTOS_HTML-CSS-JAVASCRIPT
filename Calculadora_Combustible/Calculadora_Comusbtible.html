@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Calculadora de Gastos de Gasolina</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            text-align: center;
+        }
+
+        .container {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            width: 300px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 5px;
+            margin: 8px 0;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        p {
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        span {
+            color: #0074cc;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Calculadora de Gastos de Gasolina</h1>
+        
+        <label for="distancia">Distancia (en kilometros): </label>
+        <input type="number" id="distancia" placeholder="Ingrese la distancia"><br>
+
+        <label for="consumo">Consumo (litros por 100 km): </label>
+        <input type="number" id="consumo" placeholder="Ingrese el consumo"><br>
+
+        <label for="precioLitro">Precio del litro (en euros): </label>
+        <input type="number" id="precioLitro" placeholder="Ingrese el precio por litro"><br>
+
+        <button onclick="calcularCosto()">Calcular Costo</button>
+
+        <p>Se consumen <span id="litrosConsumidos"></span> litros por <span id="kilometros"></span> kilometros.</p>
+        
+        <p>Costo estimado: <span id="costo"></span> euros.</p>
+    </div>
+
+    <script>
+        function calcularCosto() {
+            const distancia = parseFloat(document.getElementById('distancia').value);
+            const consumo = parseFloat(document.getElementById('consumo').value);
+            const precioLitro = parseFloat(document.getElementById('precioLitro').value);
+            
+            if (!isNaN(distancia) && !isNaN(consumo) && !isNaN(precioLitro)) {
+                const litrosConsumidos = (distancia * consumo) / 100;
+                const costo = litrosConsumidos * precioLitro;
+                document.getElementById('litrosConsumidos').textContent = litrosConsumidos.toFixed(2);
+                document.getElementById('kilometros').textContent = distancia;
+                document.getElementById('costo').textContent = costo.toFixed(2);
+            } else {
+                alert('Por favor, ingrese números válidos en todos los campos.');
+            }
+        }
+    </script>
+</body>
+</html>
