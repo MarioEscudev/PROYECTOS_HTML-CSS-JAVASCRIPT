@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>CalculadoraJS</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Georama:wght@300&display=swap');
+
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+html {
+    font-family: 'Georama', sans-serif;
+    font-size: 62.5%;
+}
+
+.header {
+    display: flex;
+    justify-content: center;
+    font-size: 30px;
+    font-family:Georgia, 'Times New Roman', Times, serif;
+    text-align: center;
+    
+    
+}
+
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 15px;
+}
+
+.calculator{
+    
+    display: flex;
+    flex-direction: column;
+    font-size: 2rem;
+    width: 500px;
+    border: 4px solid gray;
+    background-color: blanchedalmond;
+}
+
+
+
+.calculator-display{
+    padding: 25px 15px;
+    width: 100%;
+    text-align: right;
+    border: 4px solid gray;
+    overflow-x: auto;
+    border-radius: 70px;
+}
+
+.calculator-keypad {
+    display: flex;
+    width: 100%;
+
+}
+
+.keypad-numbers {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.keypad-button {
+    width: 25%;
+    padding: 15px 0;
+    text-align: center;
+    cursor: pointer;
+    background-color: white;
+    border: 4px solid grey ;
+    border-radius: 70px;
+}
+
+.keypad-button:hover{
+    filter: brightness(80%);
+    transition: filter .25s;
+}
+
+.keypad-button.yellow {
+    background-color: yellow;
+}
+
+.keypad-button.large {
+    width: 50%;
+}
+
+.keypad-button.dark {
+    background-color: lightgray;
+}
+
+
+    </style>
+</head>
+
+<body style="background-color: darkgray;">
+    
+    
+    <div class="container">
+        <div class="calculator" >
+            <header class="header">Calculadora By Escudev</header>
+            <div class="calculator-display">0</div>
+            <div class="calculator-keypad">
+                <div class="keypad-numbers">
+                    <div class="keypad-button large">C</div>
+                    <div class="keypad-button dark">%</div>
+                    <div class="keypad-button yellow">/</div>
+                    <div class="keypad-button">7</div>
+                    <div class="keypad-button">8</div>
+                    <div class="keypad-button">9</div>
+                    <div class="keypad-button yellow">*</div>
+                    <div class="keypad-button">4</div>
+                    <div class="keypad-button">5</div>
+                    <div class="keypad-button">6</div>
+                    <div class="keypad-button yellow">-</div>
+                    <div class="keypad-button">1</div>
+                    <div class="keypad-button">2</div>
+                    <div class="keypad-button">3</div>
+                    <div class="keypad-button yellow">+</div>
+                    <div class="keypad-button large">0</div>
+                    <div class="keypad-button">.</div>
+                    <div class="keypad-button yellow">=</div>
+                </div>
+            </div>
+            </div>
+    </div>
+    <script>
+        window.addEventListener('load' , ()=> {/* Escuchamos cuando se carga el documento html */ 
+
+/* Creamos dos constantes y nos guardamos lo elementos que necesitamos */
+const display = document.querySelector('.calculator-display');
+const keypadButtons = document.getElementsByClassName('keypad-button')
+
+/* Creamos otra constante para convertir el HTMlCollection a Array */
+const keypadButtonsArray = Array.from(keypadButtons);
+
+/* Iteramos por nuestrp nuevo array de botones */
+
+keypadButtonsArray.forEach ((button) => {
+
+    /*a cada boton le agregamos un listener */
+    button.addEventListener('click', ()=> {
+        calculadora(button, display);
+    })
+})
+});
+
+function calculadora(button, display) {
+
+switch(button.innerHTML) {
+    case 'C': 
+        borrar(display);
+        break;
+
+    case '=':
+        calcular(display);
+        break;
+
+    default:
+        actualizar(display, button);
+        break;
+}
+}
+
+function calcular(display) {
+display.innerHTML = eval(display.innerHTML) /*Tomar el string, resolverlo y guardarlo en el innerHTML del display */
+}
+
+function actualizar(display, button) {
+
+if(display.innerHTML == 0) {
+    display.innerHTML= '';
+}
+display.innerHTML += button.innerHTML;
+}
+
+function borrar(display) {
+display.innerHTML = 0;
+}
+    </script>
+</body>
+</html>
